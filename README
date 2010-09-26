@@ -1,0 +1,41 @@
+Math-ModInt version 0.001
+=========================
+
+Math::ModInt - modular integer arithmetic
+
+Ilya>   Operator overloading allows user-defined behaviors for
+        numbers, such as operations over arbitrarily large integers,
+        floating points numbers with arbitrary precision, operations
+        over "exotic" numbers such as MODULAR ARITHMETIC or p-adic
+        arithmetic, and so on.
+
+Joe>    Fine.  I want to do modular arithmetic in Perl syntax.  Is
+        there a module for that?  (checking...)  Rats, no.
+
+Martin> (after a while)  Now there is.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+  perl version 5.6.0 or higher
+  overload (usually bundled with perl)
+  Math::BigInt (usually bundled with perl)
+
+COPYRIGHT AND LICENCE
+
+Copyright (c) 2009-2010 by Martin Becker.  All rights reserved.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.6.0 or,
+at your option, any later version of Perl 5 you may have available.
+
