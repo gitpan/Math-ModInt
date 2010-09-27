@@ -1,4 +1,5 @@
 0.001  SHA1 265d8cea7c42cfc8f1a3ac4208b71deed5622b3c  lib/Math/ModInt.pm
+0.002  SHA1 a3de2276b1272e74cddfc166676144349250e8c3  lib/Math/ModInt.pm
 0.001  SHA1 7b81f9b23304a6181e0f3abed434dcfd37e5bbc9  lib/Math/ModInt/Event.pm
 0.001  SHA1 cf0fbd12f3a2536250699712a8e4c50bfb6b83db  lib/Math/ModInt/Event/Trap.pm
 0.001  SHA1 12773e5354e4dc5c2853a1f5acf3bccdd3c53189  lib/Math/ModInt/GF2.pm

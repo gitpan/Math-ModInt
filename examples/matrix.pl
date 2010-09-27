@@ -3,7 +3,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: matrix.pl 4 2010-09-26 00:06:41Z demetri $
+# $Id: matrix.pl 7 2010-09-27 16:02:14Z demetri $
 
 # This example demonstrates solving linear systems of congruences
 # with a unique solution, and how Math::ModInt::ChineseRemainder

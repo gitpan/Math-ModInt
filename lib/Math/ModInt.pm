@@ -2,7 +2,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: ModInt.pm 4 2010-09-26 00:06:41Z demetri $
+# $Id: ModInt.pm 12 2010-09-27 16:19:20Z demetri $
 
 package Math::ModInt;
 
@@ -34,7 +34,7 @@ BEGIN {
     our @ISA       = qw(Exporter);
     our @EXPORT_OK = qw(mod);
     our @CARP_NOT  = qw(Math::ModInt::ChineseRemainder);
-    our $VERSION   = 0.001;
+    our $VERSION   = 0.002;
 }
 
 use constant _MAX_MODULUS_PERL => 46340;        # floor(2.0 ** 15.5)
@@ -250,7 +250,7 @@ Math::ModInt - modular integer arithmetic
 
 =head1 VERSION
 
-This documentation refers to version 0.001 of Math::ModInt.
+This documentation refers to version 0.002 of Math::ModInt.
 
 =head1 SYNOPSIS
 
@@ -572,21 +572,9 @@ the main module, for the sake of simplicity.  Please contact the
 maintainer if you intend to use a backend not from this distribution,
 so that something clever can be done about it.
 
-At the time of release, extensive tests on various platforms will
-not yet have been performed, as it is precisely the purpose of this
-initial version to get out there in the first place.  The suite
-therefore can be expected to break somewhere for sure.  The author
-is looking forward to receive helpful reports, as well as more tests
-and examples.  You may want to look out for updates for a while
-before making your enterprise depend on these modules.  Even then,
-note the usual disclaimer.
-
-If you find something cool you can do with Math::ModInt you like
-to share with others, you are welcome to submit your code for the
-examples section, as well as your name or chosen identity for the
-hall of fame.
-
-Please submit your bug reports and suggestions through the CPAN RT,
+Math::ModInt is still undergoing beta testing on a growing number
+of platforms.  Bug reports and suggestions are always welcome --
+please submit them through the CPAN RT,
 L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Math-ModInt> .
 
 =head1 SEE ALSO
@@ -632,7 +620,13 @@ Martin Becker, E<lt>becker-cpan-mp@cozap.comE<gt>
 
 Thanks go to Ilya Zakharevich for the I<overload> package, and for
 mentioning this package ages before it was actually written, in
-perlnumber.pod.
+perlnumber.pod.  I also appreciate the role of cpantesters.org in
+quality assurance for CPAN.
+
+If you find something cool you can do with Math::ModInt you like
+to share with others, you are welcome to submit your code for the
+examples section, as well as your name or chosen identity for the
+hall of fame.
 
 =head1 LICENSE AND COPYRIGHT
 

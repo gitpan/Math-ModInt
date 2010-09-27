@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Math-ModInt
-version:            0.001
+version:            0.002
 abstract:           modular integer arithmetic
 author:
     - Martin Becker <becker-cpan-mp@cozap.com>

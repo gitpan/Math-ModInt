@@ -1,5 +1,12 @@
 Revision history for Perl extension Math::ModInt.
 
+0.002   Mon, 27 Sep 2010 19:49:03 +0200
+        Test suite bug fixes:
+        - t/05_bigint.t got a couple of conversions wrong
+        - t/06_validation.t had trouble emulating a "loading failure"
+        Test suite compatibility fix:
+        - t/92_consistency.t used a perl-5.10 feature in regexes
+
 0.001   Sat, 25 Sep 2010 06:48:16 +0200
         Initial version ready for release.
 

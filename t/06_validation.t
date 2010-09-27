@@ -2,7 +2,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: 06_validation.t 4 2010-09-26 00:06:41Z demetri $
+# $Id: 06_validation.t 19 2010-09-27 17:51:25Z demetri $
 
 # Tests of parameter validation and edge case detection of Math::ModInt.
 
@@ -52,8 +52,25 @@ use overload (
 
 package main;
 
-my $zz = eval { local %INC = (); local @INC = (); mod(0, 1) };
-ok(!defined($zz) && $@ =~ m{loading failure});
+# emulate a loading failure -- not intended as a real usage example
+my $zz = eval {
+    no warnings;
+    local $Math::ModInt::{'_best_class'} =
+        sub { 'Math::ModInt::_intentionally_nonexistent'; };
+    mod(0, 1);
+};
+my $lf_ok = !defined($zz) && $@ =~ /^loading failure/;
+if (!$lf_ok) {
+    if (defined $zz) {
+        print # zz is $zz\n";
+    }
+    else {
+        my $err = $@;
+        $err =~ s/\n.*//s;
+        print "# exception is: $err\n";
+    }
+}
+ok($lf_ok);
 
 my @int_candidates = (
     ['perl integer',              1, 500],

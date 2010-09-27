@@ -3,7 +3,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: scramble.pl 4 2010-09-26 00:06:41Z demetri $
+# $Id: scramble.pl 7 2010-09-27 16:02:14Z demetri $
 
 # Using Math::ModInt to scramble a short ASCII message (make it unreadable).
 # Output is a Perl program printing the original message when run.

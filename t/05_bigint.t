@@ -2,7 +2,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: 05_bigint.t 4 2010-09-26 00:06:41Z demetri $
+# $Id: 05_bigint.t 8 2010-09-27 16:05:25Z demetri $
 
 # Tests of the Math::ModInt::BigInt subclass of Math::ModInt.
 
@@ -128,16 +128,25 @@ sub check_function {
     my @ar  = map { $conf1->($_) } @{$args};
     my @res = map { $conf2->($_) } @{$results};
     my $ok = 1;
-    foreach my $a (@{$args}) {
+    foreach my $a (@ar) {
         my $want = shift @res;
-        my $got = $code->($a);
+        my $got = eval { $code->($a) };
         $ok &&=
-            defined($want)?
-                $got->is_defined && $got == $want:
-                $got->is_undefined;
+            defined($got) && (
+                defined($want)?
+                    $got->is_defined && $got == $want:
+                    $got->is_undefined
+            );
         if (!$ok) {
-            $want = Math::ModInt->undefined if !defined $want;
-            print "# $op($a): got $got, expected $want\n";
+            if (defined $got) {
+                $want = Math::ModInt->undefined if !defined $want;
+                print "# $op($a): got $got, expected $want\n";
+            }
+            else {
+                my $err = $@;
+                $err =~ s/\n.*//s;
+                print "# $op($a): raised exception: $err\n";
+            }
             last;
         }
     }
@@ -192,8 +201,8 @@ check_attr(\@z4, 'modulus',        [4, 4, 4, 4]);
 
 my $i = mod(7, 46559);
 check_function(
-    sub { $i->new($_[0]) },
     sub { $_[0] },
+    sub { $i->new($_[0]) },
     "$i ** ",
     sub { $i ** $_[0] },
     [-3, -2, -1, 0, 1, 2, 3, 23278, 23279, 23280, 46557, 46558, 46559, 46560],
@@ -202,17 +211,19 @@ check_function(
 
 my $m = mod(2, Math::BigInt->new('4294967387'));
 check_function(
+    sub { Math::BigInt->new($_[0]) },
     sub { $m->new(Math::BigInt->new($_[0])) },
-    sub { $_[0] },
-    "$i ** ",
+    "$m ** ",
     sub { $m ** $_[0] },
     [
-        -3, -2, -1, 0, 1, 2, 3, '2147483692', '2147483693', '2147483694',
+        '-3', '-2', '-1', '0', '1', '2', '3',
+        '2147483692', '2147483693', '2147483694',
         '4294967385', '4294967386', '4294967387', '4294967388',
     ],
     [
-        2684354617, 1073741847, 2147483694, 1, 2, 4, 8, 2147483693,
-        4294967386, 4294967385, 2147483694, 1, 2, 4,
+        '2684354617', '1073741847', '2147483694', '1', '2', '4', '8',
+        '2147483693', '4294967386', '4294967385',
+        '2147483694', '1', '2', '4',
     ],
 );
 
