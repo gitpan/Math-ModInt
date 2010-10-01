@@ -2,7 +2,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: ChineseRemainder.pm 4 2010-09-26 00:06:41Z demetri $
+# $Id: ChineseRemainder.pm 24 2010-10-01 23:16:58Z demetri $
 
 package Math::ModInt::ChineseRemainder;
 
@@ -18,7 +18,7 @@ BEGIN {
     require Exporter;
     our @ISA        = qw(Exporter);
     our @EXPORT_OK  = qw(cr_combine cr_extract);
-    our $VERSION    = '0.001';
+    our $VERSION    = '0.002';
 }
 
 use constant _INITIAL_CACHE_SIZE => 1024;
@@ -42,7 +42,7 @@ sub _calculate_params {
     my ($mod_g, $mod_s) = @_;
     my ($g, $s) = ($mod_g, $mod_s);
     my ($gg, $gs, $sg, $ss) = (1, 0, 0, 1);
-    while ($s) {
+    while (0 != $s) {
         my $m = $g % $s;
         my $d = ($g - $m) / $s;
         ($g, $gg, $gs, $s,            $sg,            $ss) =
@@ -107,7 +107,7 @@ sub cr_combine {
 sub cr_extract {
     my ($this, $desired_modulus) = @_;
     return Math::ModInt->undefined if $this->is_undefined;
-    if ($this->modulus % $desired_modulus) {
+    if (0 != $this->modulus % $desired_modulus) {
         return Math::ModInt->undefined;
     }
     my $residue = $this->residue;
@@ -152,7 +152,7 @@ Math::ModInt::ChineseRemainder - solving simultaneous integer congruences
 
 =head1 VERSION
 
-This documentation refers to version 0.001 of Math::ModInt::ChineseRemainder.
+This documentation refers to version 0.002 of Math::ModInt::ChineseRemainder.
 
 =head1 SYNOPSIS
 

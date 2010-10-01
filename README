@@ -1,22 +1,19 @@
-Math-ModInt version 0.002
+Math-ModInt version 0.003
 =========================
 
-Math::ModInt - modular integer arithmetic
+Math::ModInt is a Perl class providing modular integer arithmetic
+with overloaded Perl operators.  Its objects represent integer
+residue classes.
 
-Ilya>   Operator overloading allows user-defined behaviors for
-        numbers, such as operations over arbitrarily large integers,
-        floating points numbers with arbitrary precision, operations
-        over "exotic" numbers such as MODULAR ARITHMETIC or p-adic
-        arithmetic, and so on.
+Math::ModInt::ChineseRemainder adds functionality to find intersections
+of residue classes.
 
-Joe>    Fine.  I want to do modular arithmetic in Perl syntax.  Is
-        there a module for that?  (checking...)  Rats, no.
-
-Martin> (after a while)  Now there is.
+Math::ModInt::Event allows to customize how errors involving
+Math::ModInt objects are reported.
 
 INSTALLATION
 
-To install this module type the following:
+To install the modules of this distribution type the following:
 
    perl Makefile.PL
    make
@@ -25,11 +22,11 @@ To install this module type the following:
 
 DEPENDENCIES
 
-This module requires these other modules and libraries:
+This distribution requires these other modules and libraries:
 
   perl version 5.6.0 or higher
   overload (usually bundled with perl)
-  Math::BigInt (usually bundled with perl)
+  Math::BigInt version 1.58 or higher (usually bundled with perl)
 
 COPYRIGHT AND LICENCE
 

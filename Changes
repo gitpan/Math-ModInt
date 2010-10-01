@@ -1,5 +1,10 @@
 Revision history for Perl extension Math::ModInt.
 
+0.003   Fri, 1 Oct 2010 23:10:26 +0200
+        Compatibility fix:
+        - work around a bug in perl-5.6.2:
+          avoid using bigints in boolean context
+
 0.002   Mon, 27 Sep 2010 19:49:03 +0200
         Test suite bug fixes:
         - t/05_bigint.t got a couple of conversions wrong

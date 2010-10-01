@@ -2,7 +2,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: ModInt.pm 12 2010-09-27 16:19:20Z demetri $
+# $Id: ModInt.pm 22 2010-10-01 22:48:03Z demetri $
 
 package Math::ModInt;
 
@@ -34,7 +34,7 @@ BEGIN {
     our @ISA       = qw(Exporter);
     our @EXPORT_OK = qw(mod);
     our @CARP_NOT  = qw(Math::ModInt::ChineseRemainder);
-    our $VERSION   = 0.002;
+    our $VERSION   = 0.003;
 }
 
 use constant _MAX_MODULUS_PERL => 46340;        # floor(2.0 ** 15.5)
@@ -250,7 +250,7 @@ Math::ModInt - modular integer arithmetic
 
 =head1 VERSION
 
-This documentation refers to version 0.002 of Math::ModInt.
+This documentation refers to version 0.003 of Math::ModInt.
 
 =head1 SYNOPSIS
 
