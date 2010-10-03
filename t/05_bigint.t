@@ -2,7 +2,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: 05_bigint.t 8 2010-09-27 16:05:25Z demetri $
+# $Id: 05_bigint.t 26 2010-10-03 12:32:28Z demetri $
 
 # Tests of the Math::ModInt::BigInt subclass of Math::ModInt.
 
@@ -18,7 +18,7 @@ use Math::BigInt;
 use Math::ModInt qw(mod);
 use Math::ModInt::BigInt;
 
-plan tests => 25;
+plan tests => 26;
 
 #########################
 
@@ -207,6 +207,24 @@ check_function(
     sub { $i ** $_[0] },
     [-3, -2, -1, 0, 1, 2, 3, 23278, 23279, 23280, 46557, 46558, 46559, 46560],
     [25112, 36107, 19954, 1, 7, 49, 343, 26605, 46558, 46552, 19954, 1, 7, 49],
+);
+
+$i = mod(2, 94906859);
+check_function(
+    sub { $_[0] },
+    sub { $i->new($_[0]) },
+    "$i ** ",
+    sub { $i ** $_[0] },
+    [
+        -3, -2, -1, 0, 1, 2, 3,
+        47453428, 47453429, 47453430,
+        94906857, 94906858, 94906859, 94906860,
+    ],
+    [
+        59316787, 23726715, 47453430, 1, 2, 4, 8,
+        47453429, 94906858, 94906857,
+        47453430, 1, 2, 4,
+    ],
 );
 
 my $m = mod(2, Math::BigInt->new('4294967387'));

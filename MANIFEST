@@ -18,6 +18,7 @@ t/03_gf2.t
 t/04_perl.t
 t/05_bigint.t
 t/06_validation.t
+t/07_platform.t
 t/11_chinese_rem.t
 t/12_event.t
 t/90_pod.t

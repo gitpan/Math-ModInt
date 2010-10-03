@@ -2,7 +2,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: Perl.pm 4 2010-09-26 00:06:41Z demetri $
+# $Id: Perl.pm 26 2010-10-03 12:32:28Z demetri $
 
 package Math::ModInt::Perl;
 
@@ -22,12 +22,13 @@ use constant NFIELDS   => 2;
 
 # ----- class data -----
 
-use constant _OPT_THRESHOLD => 256;
+use constant _OPT_THRESHOLD =>   256;
+use constant _OPT_LIMIT     => 32768;
 
 BEGIN {
     require Math::ModInt;
     our @ISA     = qw(Math::ModInt);
-    our $VERSION = '0.001';
+    our $VERSION = '0.002';
 }
 
 my %inverses = ();
@@ -167,7 +168,10 @@ sub modulus {
 
 sub optimize_time {
     my ($this) = @_;
-    $inverses{$this->modulus} ||= [0];
+    my $mod = $this->modulus;
+    if ($mod <= _OPT_LIMIT) {
+        $inverses{$mod} ||= [0];
+    }
     return $this;
 }
 
@@ -196,7 +200,7 @@ Math::ModInt::Perl - modular integer arithmetic, powered by native Perl
 
 =head1 VERSION
 
-This documentation refers to version 0.001 of Math::ModInt::Perl.
+This documentation refers to version 0.002 of Math::ModInt::Perl.
 
 =head1 SYNOPSIS
 

@@ -2,7 +2,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: 04_perl.t 4 2010-09-26 00:06:41Z demetri $
+# $Id: 04_perl.t 26 2010-10-03 12:32:28Z demetri $
 
 # Tests of the Math::ModInt::Perl subclass of Math::ModInt.
 
@@ -14,7 +14,7 @@
 use strict;
 use warnings;
 use Test;
-BEGIN { plan tests => 40 };
+BEGIN { plan tests => 41 };
 use Math::ModInt qw(mod);
 
 #########################
@@ -206,5 +206,9 @@ foreach my $j (1..8) {
     $i *= $i;
 }
 ok($ip && 1 == $i);
+
+$m = mod(1, 32771);
+$mm = $m->optimize_time;
+ok($mm == $m);
 
 __END__

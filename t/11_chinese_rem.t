@@ -2,7 +2,7 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: 11_chinese_rem.t 4 2010-09-26 00:06:41Z demetri $
+# $Id: 11_chinese_rem.t 26 2010-10-03 12:32:28Z demetri $
 
 # Tests of the Math::ModInt::ChineseRemainder utility module.
 
@@ -14,7 +14,8 @@
 use strict;
 use warnings;
 use Test;
-BEGIN { plan tests => 75 };
+BEGIN { plan tests => 76 };
+use Math::BigInt;
 use Math::ModInt qw(mod);
 use Math::ModInt::ChineseRemainder qw(cr_combine cr_extract);
 ok(1);
@@ -181,12 +182,14 @@ ok($@ =~ /positive integer modulus expected/);
 Math::ModInt::ChineseRemainder->cache_resize(100);
 
 my $bi = Math::BigInt->new('1424788000964701366');
-my @mp = map { mod($bi, $_) } (46337..46340);
+my @mp = map { mod($bi, $_) } (46337..46341);
 my $ma = cr_combine(@mp);
 ok($ma == $bi && !grep { $_ != $bi } @mp);
 ok(!grep { cr_extract($ma, $_->modulus) != $_ } @mp);
 my @mq = map { $_ ** 2 } @mp;
 my $mb = cr_combine(@mq);
 ok($ma ** 2 == $mb);
+my $ms = cr_extract($ma, Math::BigInt->new('271'));
+ok($ms->is_defined && 181 == $ms->residue && 271 == $ms->modulus);
 
 __END__
