@@ -1,5 +1,25 @@
 Revision history for Perl extension Math::ModInt.
 
+0.007   Sun, 26 Aug 2012 14:56:35 +0200
+        Compatibility fixes:
+        - remove Math::Pari support for now,
+          waiting for upstream bugfix (#rt 67639)
+        - add workaround for bug in overload-1.19 (#rt 78149)
+        Performance improvement:
+        - add Math::ModInt::GF3
+
+0.006   (not released)
+        Performance improvement:
+        - add Math::ModInt::Pari to use Math::Pari if available
+        Test suite extension:
+        - add several maintainer-only checks
+
+0.005   Fri, 11 Jan 2010 19:20:07 +0100
+        Dependency update:
+        - disallow broken Math-BigInt-1.99 (rt #63215)
+        Documentation:
+        - minor corrections
+
 0.004   Sun, 3 Oct 2010 14:24:42 +0200
         Performance improvement:
         - determine maximal modulus for native arithmetic at runtime

@@ -1,8 +1,8 @@
-# Copyright (c) 2010 Martin Becker.  All rights reserved.
+# Copyright (c) 2010-2011 Martin Becker.  All rights reserved.
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: Event.pm 4 2010-09-26 00:06:41Z demetri $
+# $Id: Event.pm 31 2011-01-14 18:05:19Z demetri $
 
 package Math::ModInt::Event;
 
@@ -22,7 +22,7 @@ BEGIN {
         LoadingFailure UndefinedResult DifferentModuli
     );
     our @CARP_NOT   = qw(Math::ModInt);
-    our $VERSION    = '0.001';
+    our $VERSION    = '0.002';
 }
 
 # Math::ModInt::Event=ARRAY(...)
@@ -86,7 +86,7 @@ Math::ModInt::Event - managing events triggered by Math::ModInt
 
 =head1 VERSION
 
-This documentation refers to version 0.001 of Math::ModInt::Event.
+This documentation refers to version 0.002 of Math::ModInt::Event.
 
 =head1 SYNOPSIS
 
@@ -174,7 +174,7 @@ event, i.e. C<UndefinedResult> and C<DifferentModuli>.
 
 C<UsageError> returns an event object representing usage error
 events.  Events of this type are triggered if a method detects being
-called with incorrect parameters.  Note that not any conceivable
+called with incorrect parameters.  Note that not every conceivable
 kind of wrong usage can be detected this way -- it may just as soon
 trigger a simple perl runtime error.  Handlers will get a hint text
 indicating what was wrong as an extra parameter.
@@ -198,7 +198,7 @@ re-install Math::ModInt to resolve the situation.
 =item I<Unrecoverable>
 
 C<Unrecoverable> returns an event object representing any unrecoverable
-event, i.e. C<UsageError> and C<Nonexistent>.
+event, i.e. C<UsageError>, C<Nonexistent>, and C<LoadingFailure>.
 
 =item I<AnyEvent>
 
@@ -227,7 +227,7 @@ by the object are recoverable.
 
 The object method C<trap> arranges for a given action to be performed
 each time an event of the type represented by the object is raised.
-Its argument can be a coderef to be called or one of the strings
+Its argument can be a coderef to be called, or one of the strings
 C<"ignore"> or C<"warn"> or C<"die">, to ignore an event, trigger
 a warning message or runtime exception, respectively.
 
@@ -256,8 +256,8 @@ on.
 The object method C<isa> can be used to inspect the event hierarchy.
 It takes a fully qualified type of an event object and returns a
 boolean value telling whether the invocant is an instance of the
-given type, i.e. either precisely of the same type or a in one of
-its subcategories.
+given type, i.e. either precisely of the same type or in one of its
+subcategories.
 
 =back
 
@@ -303,7 +303,7 @@ Martin Becker, E<lt>becker-cpan-mp@cozap.comE<gt>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2010 by Martin Becker.  All rights reserved.
+Copyright (c) 2010-2011 by Martin Becker.  All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.6.0 or,

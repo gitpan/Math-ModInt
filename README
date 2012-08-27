@@ -1,4 +1,4 @@
-Math-ModInt version 0.004
+Math-ModInt version 0.007
 =========================
 
 Math::ModInt is a Perl class providing modular integer arithmetic
@@ -25,12 +25,12 @@ DEPENDENCIES
 This distribution requires these other modules and libraries:
 
   perl version 5.6.0 or higher
-  overload (usually bundled with perl)
-  Math::BigInt version 1.58 or higher (usually bundled with perl)
+  overload                             (usually bundled with perl)
+  Math::BigInt version 1.991 or higher (usually bundled with perl)
 
 COPYRIGHT AND LICENCE
 
-Copyright (c) 2009-2010 by Martin Becker.  All rights reserved.
+Copyright (c) 2009-2011 by Martin Becker.  All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.6.0 or,

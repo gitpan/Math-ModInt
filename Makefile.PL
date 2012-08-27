@@ -1,8 +1,8 @@
-# Copyright (c) 2009-2010 Martin Becker.  All rights reserved.
+# Copyright (c) 2009-2012 Martin Becker.  All rights reserved.
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: Makefile.PL 4 2010-09-26 00:06:41Z demetri $
+# $Id: Makefile.PL 36 2012-08-26 22:25:41Z demetri $
 
 use strict;
 use ExtUtils::MakeMaker;
@@ -13,7 +13,7 @@ WriteMakefile(
     PREREQ_PM          => {
         'overload'     => 0,
         'Carp'         => 0,
-        'Math::BigInt' => '1.58',
+        'Math::BigInt' => '1.991',      # '>= 1.58, != 1.99',
     },
     ABSTRACT_FROM      => 'lib/Math/ModInt.pm',
     AUTHOR             => 'Martin Becker <becker-cpan-mp@cozap.com>',
@@ -22,6 +22,13 @@ WriteMakefile(
     ): (),
     $ExtUtils::MakeMaker::VERSION >= 6.31? (
         LICENSE        => 'perl',
+    ): (),
+    $ExtUtils::MakeMaker::VERSION >= 6.46? (
+        META_MERGE => {
+            recommends => {
+                'Math::BigInt::GMP' => 0,
+            }
+        },
     ): (),
     $ExtUtils::MakeMaker::VERSION >= 6.47? (
         MIN_PERL_VERSION => '5.006',

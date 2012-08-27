@@ -1,8 +1,8 @@
-# Copyright (c) 2009-2010 Martin Becker.  All rights reserved.
+# Copyright (c) 2009-2012 Martin Becker.  All rights reserved.
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: ChineseRemainder.pm 24 2010-10-01 23:16:58Z demetri $
+# $Id: ChineseRemainder.pm 37 2012-08-26 22:42:54Z demetri $
 
 package Math::ModInt::ChineseRemainder;
 
@@ -18,7 +18,7 @@ BEGIN {
     require Exporter;
     our @ISA        = qw(Exporter);
     our @EXPORT_OK  = qw(cr_combine cr_extract);
-    our $VERSION    = '0.002';
+    our $VERSION    = '0.007';
 }
 
 use constant _INITIAL_CACHE_SIZE => 1024;
@@ -42,17 +42,17 @@ sub _calculate_params {
     my ($mod_g, $mod_s) = @_;
     my ($g, $s) = ($mod_g, $mod_s);
     my ($gg, $gs, $sg, $ss) = (1, 0, 0, 1);
-    while (0 != $s) {
+    while ($s != 0) {
         my $m = $g % $s;
         my $d = ($g - $m) / $s;
         ($g, $gg, $gs, $s,            $sg,            $ss) =
         ($s, $sg, $ss, $m, $gg - $d * $sg, $gs - $d * $ss);
     }
-    $mod_s /= $g if 1 != $g;
-    my $lcm = $mod_g * $mod_s;
-    $mod_g /= $g if 1 != $g;
-    my $coeff_g = mod($mod_s * $gs, $lcm);
-    my $coeff_s = $coeff_g->new($mod_g * $gg);
+    $ss = abs $ss;
+    $sg = abs $sg;
+    my $lcm     =            $mod_g * $sg;
+    my $coeff_g =           mod($gs * $sg, $lcm);
+    my $coeff_s = $coeff_g->new($gg * $ss);
     return ($coeff_g, $coeff_s, $g);
 }
 
@@ -94,7 +94,7 @@ sub cr_combine {
         my $that = pop @these;
         my ($coeff_this, $coeff_that, $gcd) =
             _get_params($this->modulus, $that->modulus);
-        if (1 != $gcd && $this->residue % $gcd != $that->residue % $gcd) {
+        if ($gcd != 1 && $this->residue % $gcd != $that->residue % $gcd) {
             return Math::ModInt->undefined;
         }
         $this =
@@ -152,7 +152,7 @@ Math::ModInt::ChineseRemainder - solving simultaneous integer congruences
 
 =head1 VERSION
 
-This documentation refers to version 0.002 of Math::ModInt::ChineseRemainder.
+This documentation refers to version 0.007 of Math::ModInt::ChineseRemainder.
 
 =head1 SYNOPSIS
 
@@ -233,11 +233,11 @@ cache, releasing the memory used for their storage.  It returns 0.
 
 =item I<cache_resize>
 
-The class method C<cache_resize> takes a number and configures the
-maximal number of slots of the cache as that value, which it also
-returns.  If the new size is less than the number of slots already
-in use, items in excess of that number are removed immediately.  If
-the new size is zero, caching is altogether disabled.
+The class method C<cache_resize> configures the maximal number of
+slots of the cache as the given value, which it also returns.  If
+the new size is less than the number of slots already in use, items
+in excess of that number are removed immediately.  If the new size
+is zero, caching is altogether disabled.
 
 =back
 
@@ -287,7 +287,7 @@ Martin Becker, E<lt>becker-cpan-mp@cozap.comE<gt>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2010 by Martin Becker.  All rights reserved.
+Copyright (c) 2010-2012 by Martin Becker.  All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.6.0 or,

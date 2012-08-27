@@ -1,8 +1,8 @@
-# Copyright (c) 2009-2010 Martin Becker.  All rights reserved.
+# Copyright (c) 2009-2012 Martin Becker.  All rights reserved.
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: 06_validation.t 19 2010-09-27 17:51:25Z demetri $
+# $Id: 06_validation.t 38 2012-08-26 22:44:59Z demetri $
 
 # Tests of parameter validation and edge case detection of Math::ModInt.
 
@@ -21,7 +21,7 @@ use_or_bail('Math::BigRat');
 use_or_bail('Math::Complex');
 use Math::ModInt qw(mod);
 
-plan(tests => 70);
+plan(tests => 71);
 
 #########################
 
@@ -196,5 +196,8 @@ $uu = $u->optimize_space;
 ok(defined($uu) && $uu->is_undefined);
 $uu = $u->optimize_default;
 ok(defined($uu) && $uu->is_undefined);
+
+my $mm = eval { mod(0, MyBinary->new(1.5)) };
+ok(!defined($mm)  && $@ =~ / positive integer modulus expected /);
 
 __END__

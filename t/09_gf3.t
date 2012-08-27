@@ -2,19 +2,19 @@
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: 04_perl.t 38 2012-08-26 22:44:59Z demetri $
+# $Id: 09_gf3.t 38 2012-08-26 22:44:59Z demetri $
 
-# Tests of the Math::ModInt::Perl subclass of Math::ModInt.
+# Tests of the Math::ModInt::GF3 subclass of Math::ModInt.
 
 # Before `make install' is performed this script should be runnable with
-# `make test'. After `make install' it should work as `perl t/04_perl.t'
+# `make test'. After `make install' it should work as `perl t/09_gf3.t'
 
 #########################
 
 use strict;
 use warnings;
 use Test;
-BEGIN { plan tests => 41 };
+BEGIN { plan tests => 11 };
 use Math::ModInt qw(mod);
 
 #########################
@@ -108,107 +108,25 @@ sub check_attr {
     ok($ok);
 }
 
-my @z4  = map { mod($_, 4) } 0..3;
-my @gf5 = map { mod($_, 5) } 0..4;
-
-my $m = mod(0, 5);
-my $mm;
-$mm = $m->optimize_default;
-ok($mm == $m);
-$mm = $m->optimize_time;
-ok($mm == $m);
-
+my @gf3 = map { mod($_, 3) } 0..2;
 check_lefty(
-    \@gf5, 'new', sub { $_[0]->new($_[1]) },
+    \@gf3, 'new', sub { $_[0]->new($_[1]) },
     [-2, -1, 0, 1, 2, 3],
-    '340123' x 5,
+    '120' x 6,
 );
-check_unary(\@gf5, 'neg', sub { -$_[0] }, '04321');
-check_unary(\@gf5, 'inv', sub { $_[0]->inverse }, '51324');
-check_binary(\@gf5, '+', sub { $_[0] + $_[1] }, '0123412340234013401240123');
-check_binary(\@gf5, '-', sub { $_[0] - $_[1] }, '0432110432210433210443210');
-check_binary(\@gf5, '*', sub { $_[0] * $_[1] }, '0000001234024130314204321');
-check_binary(\@gf5, '/', sub { $_[0] / $_[1] }, '5000051324521435341254231');
+check_unary(\@gf3, 'neg', sub { -$_[0] }, '021');
+check_unary(\@gf3, 'inv', sub { $_[0]->inverse }, '312');
+check_binary(\@gf3, '+', sub { $_[0] + $_[1] }, '012120201');
+check_binary(\@gf3, '-', sub { $_[0] - $_[1] }, '021102210');
+check_binary(\@gf3, '*', sub { $_[0] * $_[1] }, '000012021');
+check_binary(\@gf3, '/', sub { $_[0] / $_[1] }, '300312321');
 check_lefty(
-    \@gf5, '**', sub { $_[0] ** $_[1] },
+    \@gf3, '**', sub { $_[0] ** $_[1] },
     [-2, -1, 0, 1, 2, 3],
-    '551000111111431243421342141414',
+    '331000111111121212',
 );
-check_attr(\@gf5, 'residue',        [0, 1, 2,  3,  4]);
-check_attr(\@gf5, 'signed_residue', [0, 1, 2, -2, -1]);
-check_attr(\@gf5, 'modulus',        [5, 5, 5,  5,  5]);
-
-$mm = $m->optimize_default;
-ok($mm == $m);
-$mm = $m->optimize_space;
-ok($mm == $m);
-
-check_unary(\@gf5, 'inv', sub { $_[0]->inverse }, '51324');
-
-$mm = $m->optimize_default;
-ok($mm == $m);
-
-check_lefty(
-    \@z4, 'new', sub { $_[0]->new($_[1]) },
-    [-3, -2, -1, 0, 1, 2, 3, 4],
-    '1230' x 8,
-);
-check_unary(\@z4, 'neg', sub { -$_[0] }, '0321');
-check_unary(\@z4, 'inv', sub { $_[0]->inverse }, '4143');
-check_binary(\@z4, '+', sub { $_[0] + $_[1] }, '0123123023013012');
-check_binary(\@z4, '-', sub { $_[0] - $_[1] }, '0321103221033210');
-check_binary(\@z4, '*', sub { $_[0] * $_[1] }, '0000012302020321');
-check_binary(\@z4, '/', sub { $_[0] / $_[1] }, '4040414342424341');
-check_lefty(
-    \@z4, '**', sub { $_[0] ** $_[1] },
-    [-2, -1, 0, 1, 2, 3],
-    '441000111111441200131313',
-);
-check_attr(\@z4, 'residue',        [0, 1, 2, 3]);
-check_attr(\@z4, 'signed_residue', [0, 1, -2, -1]);
-check_attr(\@z4, 'modulus',        [4, 4, 4, 4]);
-
-$m = mod(3, 257);
-
-$mm = $m->optimize_default;
-ok($mm == $m);
-$mm = $m->optimize_time;
-ok($mm == $m);
-$mm = $m->optimize_time;
-ok($mm == $m);
-
-$mm = $m ** -1;
-ok(86 == $mm);
-$mm = $m ** -2;
-ok(200 == $mm);
-
-$mm = $m->optimize_space;
-ok($mm == $m);
-
-$mm = $m ** -1;
-ok(86 == $mm);
-$mm = $m ** -2;
-ok(200 == $mm);
-
-$mm = $m->optimize_default;
-ok($mm == $m);
-
-$mm = $m ** -1;
-ok(86 == $mm);
-$mm = $m ** -2;
-ok(200 == $mm);
-
-$m = mod(3, 46337);
-my $i = $m ** 181;
-my $ip = 1;
-foreach my $j (1..8) {
-    $ip &&= $i->residue > 1;
-    $i *= $i;
-}
-ok($ip && 1 == $i);
-
-$m = mod(1, 32771);
-$mm = $m->optimize_time;
-ok($mm == $m);
+check_attr(\@gf3, 'residue',        [0, 1, 2]);
+check_attr(\@gf3, 'signed_residue', [0, 1, -1]);
+check_attr(\@gf3, 'modulus',        [3, 3, 3]);
 
 __END__

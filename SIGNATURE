@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.66.
+signed via the Module::Signature module, version 0.68.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,46 +14,49 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 458ca35582621db79e5d8db62c2e0f3be714c6d4 Changes
-SHA1 672a1327cf76d686a141d3f3bedf1a1f1c374d0c MANIFEST
-SHA1 3023e4001a242b0daca27e35062b07a6f3951056 META.yml
-SHA1 287761a85e29b15962fcc1bd5d8ee966c9e17288 Makefile.PL
-SHA1 55edafb9fe7ad035567ce4b53aca3e64de0a4e43 README
+SHA1 5b9ce4e25fc2c4888d54512114b826a8aea2a885 Changes
+SHA1 0870d72e6eb57e93173ebb180df89a8dd1d27e41 MANIFEST
+SHA1 fa3dcc1feb8ca118e869bdbbe529526b05b3200a META.json
+SHA1 0f9f48ef6726652b5c0014ca7f89cf0dd9de519b META.yml
+SHA1 02f0d7e9f89d30dbf5a49e3a007990b8d0391bca Makefile.PL
+SHA1 85d5e9cb9ce4f60e5ce14788ed143da168ae1006 README
 SHA1 a6abf1ac28f06acc974423d381fbf9d421f574d3 examples/matrix.pl
 SHA1 67756ae77eea912edc0c2dad4a271c069dda68e1 examples/scramble.pl
-SHA1 53c4af1381e2ca282a019032a6eef8d972a293fd lib/Math/ModInt.pm
+SHA1 0614695d4b2339dcbf8891dd8c32743d1a94b366 lib/Math/ModInt.pm
 SHA1 a4937229b3081cbfd343b0de61773203ab94f147 lib/Math/ModInt/BigInt.pm
-SHA1 1828f86235e46571308a64f3ab473f781686c2b5 lib/Math/ModInt/ChineseRemainder.pm
-SHA1 7b81f9b23304a6181e0f3abed434dcfd37e5bbc9 lib/Math/ModInt/Event.pm
+SHA1 0b6e761add57ffb270d045345bf9c414c56675cb lib/Math/ModInt/ChineseRemainder.pm
+SHA1 5a10a9146e4ef31788f8c1918a124a31c6caac6b lib/Math/ModInt/Event.pm
 SHA1 cf0fbd12f3a2536250699712a8e4c50bfb6b83db lib/Math/ModInt/Event/Trap.pm
 SHA1 12773e5354e4dc5c2853a1f5acf3bccdd3c53189 lib/Math/ModInt/GF2.pm
+SHA1 bd691d7431e7e5442b9e43b2a24e9e0f8ec5cb4f lib/Math/ModInt/GF3.pm
 SHA1 690916558d3dbc62938f333d21a320260d299627 lib/Math/ModInt/Perl.pm
 SHA1 bee2d4e20090adb5e79f2f02e1872dc271a80a03 lib/Math/ModInt/Trivial.pm
 SHA1 d242a30880f6920395ec31255280e266a9e3d048 t/01_basics.t
 SHA1 79e2e35bbac0b6234337b5870dcad71f3efb256b t/02_trivial.t
 SHA1 6c68551052ac5af57ca90c86ff50f1b2ec011659 t/03_gf2.t
-SHA1 889819b8bbb209eaf612e95324841f351f8a09d7 t/04_perl.t
-SHA1 2c79b4372853bad8f49f73fc06ded6475ed89736 t/05_bigint.t
-SHA1 c27501caba3db0fb731814a089004819c7c9c337 t/06_validation.t
-SHA1 422277a99578618b318e2467d0ab25227a45bb9b t/07_platform.t
-SHA1 09401b50d1b42424984c664c40327f60906376c9 t/11_chinese_rem.t
+SHA1 e7f1acc016754befa41ea031f3d278b008f776f6 t/04_perl.t
+SHA1 ae6a658161318e0a890dfbbe373271ff9c468e85 t/05_bigint.t
+SHA1 0f45b11dc3c6ec4c5a0c220ed8d59a35f57fcbd0 t/06_validation.t
+SHA1 3d46dcf529b35b9533810bf4694b3d5e774d1d45 t/07_platform.t
+SHA1 22f1e4d7b70746031bf4bd20efc8b9892afae43f t/09_gf3.t
+SHA1 69a8cd0affff8ecbe50d2f744d93b4248e243d7d t/11_chinese_rem.t
 SHA1 6cd304c339f6ac873b45dc380814b17e4f621dcc t/12_event.t
 SHA1 12ee5eb7013598c45007b488ade9b94f146d5c7e t/90_pod.t
 SHA1 c28ebf0fa25e9cb7a8fbbbf5ae78dc39952f607a t/91_pod_cover_cp.t
-SHA1 966fbc87e1f380930f1ddbb21016185f85f3ae22 t/92_consistency.t
+SHA1 86761e785951183ecf9ebd2ca166f1bb42462912 t/92_consistency.t
 SHA1 ae1c513eda8e690f86ca3c3dbb0f3b50e8800cc5 t/93_examples.t
 SHA1 9d254fd028ddd23486cf1008106f10322b668571 t/95_versions.t
 SHA1 1496e251e89201034ae1c6519408983a31f2ae5b t/99_signature.t
-SHA1 830d1006c050a90cdfcc07fe10ac4a0a5c6c74db t/data/KNOWN_VERSIONS
+SHA1 3ef70fec96c00ccb390e36f0b82fb2fdfdced5da t/data/KNOWN_VERSIONS
 SHA1 4dcc41a9060f0eb6a4b321f925883b7bd55bbbd6 t/lib/Test/MyUtils.pm
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (Darwin)
+Version: GnuPG v1.4.11 (Darwin)
 
-iQEcBAEBAgAGBQJMqI+bAAoJEGH3bZuRPycN4jkIANMwrk4FMR41CopMUDEL2UCV
-pgaN5j1vrg4u2+uCtmS/pdlPKnXpKFGD0S52XJv2D+8/X/Q5keqwDH0VLyu0VlPd
-MfHHi929xNKV+6TW1F4lwLYebtom0spPRV2VzgP8krbt5+ro1e0vyfjlUGL01h13
-hqE6+SsUAeS9orcYlXJonZj/R8pPz3dy5xIcPVe+dgp9zDA0HYiOiGBtiOQ2RY3G
-62/WkQeq4JGxSQYd0Nvng0laSVtZ4ANVTeB+i9FIKge7mq3wDT9XKddbceBRIENr
-plSiiLCY1soF70eQ1L/gONPCRB+UF8x4+p6w1XFsOiB9Lv/3DkNKh0oTxEPsLBA=
-=asYQ
+iQEcBAEBAgAGBQJQOryfAAoJEGH3bZuRPycNHhYH/iM/8P2AAEzzcAGx6QVDhG2r
+PADz5HoXbbABFnQ5Wz86I8fDIO+Y718TsWEX+Pzbvs9jbVSRgY4md6MwAudRHVEd
+a7Krla1H/hbyAPWI2L1xoTYJABMgklRHG5Bl0C9Dk3RgeFwGiOBYPcrFBNl4KS5L
+tii8dp9Ph19i0e/EpOTjV1aXs1or7ISw37/6by37baw9iIxgfzjik5Ez7ag6Zl1w
+9t4UIzzdWNAlOEKuZZmbLl9e8ifBlgPoDnTt9PJLS83PR4kg4hkIQGwGGVA00H7i
+dI3uupCO9jqpjhsIRdi9GaMoUuM8/oAVqK/1ceoGb40XqJ97V9uRqJ+0Vi3KO6E=
+=lOIy
 -----END PGP SIGNATURE-----

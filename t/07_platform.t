@@ -1,8 +1,8 @@
-# Copyright (c) 2010 Martin Becker.  All rights reserved.
+# Copyright (c) 2012 Martin Becker.  All rights reserved.
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: 07_platform.t 30 2010-10-03 14:02:34Z demetri $
+# $Id: 07_platform.t 38 2012-08-26 22:44:59Z demetri $
 
 # Gather platform information to help analyzing test reports.
 
@@ -35,11 +35,19 @@ foreach my $module (qw(
     overload
     Carp
     Math::BigInt
+    Math::BigInt::FastCalc
+    Math::BigInt::GMP
+    Math::BigInt::Pari
 )) {
     if (eval "require $module") {
         my $version = eval { $module->VERSION };
         if (defined $version) {
             print "# module $module has version $version\n";
+            if ('Math::Pari' eq $module) {
+                my $pve =
+                    eval { Math::Pari::pari_version_exp() } || '(unknown)';
+                print "# pari library has version $pve\n";
+            }
         }
         else {
             print "# module $module has no version number\n";

@@ -1,8 +1,8 @@
-# Copyright (c) 2009-2010 Martin Becker.  All rights reserved.
+# Copyright (c) 2009-2012 Martin Becker.  All rights reserved.
 # This package is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 #
-# $Id: ModInt.pm 26 2010-10-03 12:32:28Z demetri $
+# $Id: ModInt.pm 36 2012-08-26 22:25:41Z demetri $
 
 package Math::ModInt;
 
@@ -34,7 +34,7 @@ BEGIN {
     our @ISA       = qw(Exporter);
     our @EXPORT_OK = qw(mod);
     our @CARP_NOT  = qw(Math::ModInt::ChineseRemainder);
-    our $VERSION   = 0.004;
+    our $VERSION   = 0.007;
 }
 
 sub _max_modulus_perl {
@@ -51,6 +51,9 @@ use constant _MAX_MODULUS_PERL => _max_modulus_perl();
 
 my $undefined = bless [];                       # singleton
 my %loaded = ();                                # collects loaded modules
+
+my $check_pari  = 1;
+my $use_pari;
 
 # ----- private subroutines -----
 
@@ -80,7 +83,8 @@ sub _best_class {
     my ($modulus) = @_;
     if (_is_integer($modulus)) {
         return 'Math::ModInt::BigInt'  if $modulus >  _MAX_MODULUS_PERL;
-        return 'Math::ModInt::Perl'    if $modulus >  2;
+        return 'Math::ModInt::Perl'    if $modulus >  3;
+        return 'Math::ModInt::GF3'     if $modulus == 3;
         return 'Math::ModInt::GF2'     if $modulus == 2;
         return 'Math::ModInt::Trivial' if $modulus == 1;
     }
@@ -260,7 +264,7 @@ Math::ModInt - modular integer arithmetic
 
 =head1 VERSION
 
-This documentation refers to version 0.004 of Math::ModInt.
+This documentation refers to version 0.007 of Math::ModInt.
 
 =head1 SYNOPSIS
 
@@ -554,7 +558,7 @@ to the modulus.  Operands with different moduli generally can not
 be combined in binary operations.
 
 By default, operations with incompatible operands consistently yield
-the Math::Polynomial->undefined object, which will raise an exception
+the Math::ModInt->undefined object, which will raise an exception
 upon modulus/residue inspection, but can be recogized by the boolean
 result of the is_defined/is_undefined methods.
 
@@ -567,15 +571,20 @@ import Math::BigInt before Math::ModInt, like this:
   use Math::BigInt try => 'GMP,Pari';
   use Math::ModInt qw(mod);
 
+The minimal required perl version is 5.6.
+
 =head1 BUGS AND LIMITATIONS
 
-So far, only a limited amount of effort has been put into making
-this module suite faster.  We prefer native integer arithmetic over
-Math::BigInt only where it seems really save to do so, and we memoize
-only to little extent.
+Math::BigInt version 1.99 can not be used together with this module,
+as the former has a severe bug with modular integer arithmetic which
+is detected in our test suite.  Math::BigInt version 1.991 has this
+issue resolved.
 
-The event handling stuff, on the other hand, may already be coming
-close to overkill.
+A little bit of effort has been put into making this module suite
+reasonably efficient even in the absence of convenient big integer
+libraries.  For best performance, though, we recommend installing
+a fast integer library such as Math::BigInt::GMP together with
+Math::ModInt.
 
 Currently, the choice of Math::ModInt backend is hard-wired into
 the main module, for the sake of simplicity.  Please contact the
@@ -640,7 +649,7 @@ hall of fame.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2009-2010 by Martin Becker.  All rights reserved.
+Copyright (c) 2009-2012 by Martin Becker.  All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.6.0 or,
